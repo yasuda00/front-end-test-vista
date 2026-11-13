@@ -1,61 +1,72 @@
-
 # Vista Solutions - Frontend
 
-A Flutter mobile application developed as part of the Vista Solutions technical assessment.
+A modern, responsive Flutter mobile application developed as part of the Vista Solutions technical assessment.
 
-The application integrates with the Node.js REST API to manage companies and their services.
+The application integrates with the Node.js REST API to seamlessly manage companies and their associated services with modern UI/UX design patterns, robust client-side validation, and state management.
 
-## Features
+---
 
-- View a list of companies.
-- Display company registration numbers.
-- View services associated with each company.
-- Create new companies.
-- Create new services.
-- Select a company when creating a service.
-- Form validation and error handling.
-- API integration with loading indicators.
+## 🌟 Key Features
 
-## Technology Stack
+- **Company Management**:
+  - View companies with interactive collapsible gradient headers.
+  - Display company registration numbers and service counts.
+  - Pull-to-refresh data synchronization.
+- **Service Management**:
+  - View services associated with each company in formatted price chips (RM currency).
+  - Create and link new services to existing companies.
+- **Modern UI & Motion Design**:
+  - **Material 3 Design System**: Clean typography using Google Fonts (Inter).
+  - **Fluid Animations**: Smooth entrance transitions and micro-interactions powered by `flutter_animate`.
+  - **Adaptive Header**: Dynamic collapsing gradient header that transforms between expanded title mode and pinned mini-logo mode.
+  - **Optimized Performance**: Scoped state rebuilds and `const` widget trees for smooth 60fps scrolling.
+- **Client-Side Form Validation**: Instant user feedback with error indicators, numeric constraints, and double-submit guards.
+- **Error Handling**: Graceful network error recovery with retry prompts and friendly empty states.
 
-- Flutter
-- Dart
-- Provider (State Management)
-- HTTP (API Requests)
-- Material UI
+---
 
-## Requirements
+## 🛠️ Technology Stack
 
-- Flutter SDK
-- Dart SDK
-- Android Studio
-- Android Emulator or Android Device
+- **Framework**: [Flutter](https://flutter.dev/) (3.x)
+- **Language**: [Dart](https://dart.dev/)
+- **State Management**: [Provider](https://pub.dev/packages/provider) (`ChangeNotifierProvider`, `Consumer`)
+- **Networking**: [http](https://pub.dev/packages/http)
+- **Typography**: [google_fonts](https://pub.dev/packages/google_fonts) (Inter)
+- **Animations**: [flutter_animate](https://pub.dev/packages/flutter_animate)
+- **Design System**: Material 3
+
+---
+
+## 📋 Requirements
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- [Dart SDK](https://dart.dev/get-dart)
+- Android Studio / VS Code
+- Android Emulator or physical device
 - Backend API running locally
 
-## Installation
+---
 
-Clone the repository:
+## 🚀 Installation & Setup
 
-```bash
-git clone https://github.com/yasuda00/front-end-test-vista.git
-cd front-end-test-vista
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yasuda00/front-end-test-vista.git
+   cd front-end-test-vista
+   ```
 
-Install dependencies:
+2. **Install dependencies**:
+   ```bash
+   flutter pub get
+   ```
 
-```bash
-flutter pub get
-```
+---
 
-## Backend Configuration
+## ⚙️ Backend Configuration
 
-The application communicates with the backend API.
-
-API configuration is located in:
+API endpoints and base URLs are centralized in:
 
 `lib/utils/constants.dart`
-
-Default Android Emulator configuration:
 
 ```dart
 class ApiConstants {
@@ -66,91 +77,91 @@ class ApiConstants {
 }
 ```
 
-**Important:**
+> **Network Host Mapping:**
+> - **Android Emulator**: Use `http://10.0.2.2:3000` (points to the host machine's `localhost`).
+> - **Physical Android Device**: Replace `10.0.2.2` with your computer's local Wi-Fi IP address (e.g., `http://192.168.1.X:3000`).
+> - **Flutter Web / Desktop**: Use `http://localhost:3000`.
 
-- Android Emulator: Use `10.0.2.2` to access the host machine's localhost.
-- Physical Android Device: Replace the IP with your computer's local network IP address.
-- Flutter Web: Use `localhost` instead of `10.0.2.2`.
+*Ensure the backend API and database server are running before launching the application.*
 
-Ensure the backend API and MySQL Server are running before launching the application.
+Backend repository: [https://github.com/yasuda00/back-end-test-vista](https://github.com/yasuda00/back-end-test-vista)
 
-Backend repository:
+---
 
-https://github.com/yasuda00/back-end-test-vista
+## 📱 Running the Application
 
-## Running the Application
+1. **Start the backend server first**:
+   ```bash
+   npm run dev
+   ```
 
-Start the backend API first:
+2. **Check connected devices**:
+   ```bash
+   flutter devices
+   ```
 
-```bash
-npm run dev
-```
+3. **Run the Flutter application**:
+   ```bash
+   flutter run
+   ```
 
-Then, from the frontend project directory, check connected devices:
+   To target a specific emulator:
+   ```bash
+   flutter run -d emulator-5554
+   ```
 
-```bash
-flutter devices
-```
+---
 
-Run the application:
-
-```bash
-flutter run
-```
-
-To target a specific Android emulator:
-
-```bash
-flutter run -d emulator-5554
-```
-
-## Project Structure
+## 📁 Project Structure
 
 ```text
 lib/
-├── main.dart
+├── main.dart                          # App entry point, Material 3 theme & Provider setup
 ├── models/
-│   ├── company.dart
-│   └── service.dart
+│   ├── company.dart                   # Company data model & JSON deserialization
+│   └── service.dart                   # Service data model & JSON deserialization
 ├── providers/
-│   ├── company_provider.dart
-│   └── service_provider.dart
+│   ├── company_provider.dart          # State management for fetching & creating companies
+│   └── service_provider.dart          # State management for service creation
 ├── screens/
-│   ├── company_list_screen.dart
-│   ├── create_company_screen.dart
-│   └── create_service_screen.dart
+│   ├── company_list_screen.dart       # Main dashboard with animated list & sliver header
+│   ├── create_company_screen.dart     # Company creation form with validation
+│   └── create_service_screen.dart     # Service creation form with company dropdown & validation
 ├── services/
-│   └── api_service.dart
-├── utils/
-│   └── constants.dart
-└── widgets/
+│   └── api_service.dart               # HTTP client service interacting with backend REST API
+└── utils/
+    └── constants.dart                 # API endpoints and configuration
 ```
 
-## Validation
+---
 
-The application includes the following validations:
+## 🛡️ Form Validation & Security
 
-- Company name is required.
-- Company registration number is required.
-- Service name is required.
-- A company must be selected.
-- Service price is required and must be numeric.
-- Negative service prices are not accepted.
+The client application works in tandem with backend `express-validator` to provide both **immediate user experience** and **data integrity**:
 
-## Build
+- **Company Name**: Required, trimmed validation.
+- **Registration Number**: Required, trimmed validation.
+- **Company Selection**: Dropdown validation ensures a service is always mapped to a valid company.
+- **Service Name**: Required, trimmed validation.
+- **Service Price**:
+  - Required and validated as numeric format.
+  - Safe parsing against format exceptions.
+  - Disallows negative numbers (`price >= 0`).
+- **Double-Submit Protection**: Prevents duplicate submissions while asynchronous requests are executing.
 
-To analyze the project:
+---
 
-```bash
-flutter analyze
-```
+## 🏗️ Build & Release
 
-To create an Android APK:
+1. **Analyze Code**:
+   ```bash
+   flutter analyze
+   ```
 
-```bash
-flutter build apk --release
-```
+2. **Build Android APK (Release)**:
+   ```bash
+   flutter build apk --release
+   ```
 
-The generated APK can be found at:
-
-`build/app/outputs/flutter-apk/app-release.apk`
+   The generated APK will be available at:
+   `build/app/outputs/flutter-apk/app-release.apk`
